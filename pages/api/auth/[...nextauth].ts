@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import { auth } from "@/app/firebase";
 
-
 export const authOptions = {
   // Configure one or more authentication providers
   pages: {
@@ -30,5 +29,13 @@ export const authOptions = {
       }
     })
   ],
+  // callbacks: {
+  //   session: async ({ session, token, user }:any) => {
+  //     if (session?.user) {
+  //       session.user.id = user.id;
+  //     }
+  //     return session;
+  //   },
+  // },
 }
 export default NextAuth(authOptions)
