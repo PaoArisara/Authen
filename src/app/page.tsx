@@ -27,35 +27,35 @@ export default function Home() {
 
   });
 
-  //fetch user project
-  useEffect(()=>{
-    getUserProject();
-  },[])
-  const [userProject, setUserProject] = useState([])
-  const getUserProject = async () => {
-    if (session) {
-      const q = query(collection(db, "shops"), where("email", "==", session.data?.user?.email));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      });
-
-    }
-  }
-
-  // //fetch data from firestore
-  // const db = getFirestore(app)
+  // //fetch user project
   // useEffect(()=>{
-  //   getPost();
+  //   getUserProject();
   // },[])
-  // const getPost = async () => {
-  //   const querySnapshot = await getDocs(collection(db, "shops"));
-  //   querySnapshot.forEach((doc) => {
-  //     // doc.data() is never undefined for query doc snapshots
-  //     console.log(doc.id, " => ", doc.data());
-  //   });
+  // const [userProject, setUserProject] = useState([])
+  // const getUserProject = async () => {
+  //   if (session) {
+  //     const q = query(collection(db, "shops"), where("email", "==", session.data?.user?.email));
+  //     const querySnapshot = await getDocs(q);
+  //     querySnapshot.forEach((doc) => {
+  //       // doc.data() is never undefined for query doc snapshots
+  //       console.log(doc.id, " => ", doc.data());
+  //     });
+
+  //   }
   // }
+
+  //fetch data from firestore
+  const db = getFirestore(app)
+  useEffect(()=>{
+    getPost();
+  },[])
+  const getPost = async () => {
+    const querySnapshot = await getDocs(collection(db, "shops"));
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
+  }
   const session = useSession({
     required: true,
     onUnauthenticated() {
